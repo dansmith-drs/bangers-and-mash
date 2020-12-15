@@ -97,3 +97,13 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-hello-world)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+### Google Drive API Integration
+
+https://dev.to/mihaben/building-a-galery-with-gatsby-google-sheets-and-netlify-254l
+https://jmolivas.com/how-use-google-spreadsheet-manage-content-and-trigger-deployment-your-gatsbyjs-site
+https://console.developers.google.com/apis
+
+Need to share sheet with service account
+
+enable https://console.developers.google.com/apis/library/sheets.googleapis.com
