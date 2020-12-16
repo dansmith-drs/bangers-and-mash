@@ -34,15 +34,7 @@ export interface ReviewInfo {
 }
 
 const ReviewsPage = ({ data }: ReviewsPageProps) => {
-  const [selectedReview, setSelectedReview] = React.useState<string | null>(
-    null
-  );
-
   const reviews = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
-
-  const activeReview: ReviewInfo | null = selectedReview
-    ? reviews.find((review) => review.id === selectedReview)
-    : null;
 
   return (
     <Flex
@@ -58,26 +50,11 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
       <Header />
       <div style={{ width: '100%' }}>
         <AspectRatio ratio={16 / 9}>
-          <ReviewMap
-            reviews={reviews}
-            selectedReview={selectedReview}
-            setSelectedReview={(id) => {
-              selectedReview === id
-                ? setSelectedReview(null)
-                : setSelectedReview(id);
-            }}
-          />
+          <ReviewMap reviews={reviews} />
         </AspectRatio>
       </div>
       <Box marginLeft="1rem" marginRight="1rem">
-        {activeReview ? (
-          <Review review={activeReview} />
-        ) : (
-          <>
-            <RestaurantSearch reviews={reviews} />
-            <div>Nothing selected</div>
-          </>
-        )}
+        <RestaurantSearch reviews={reviews} />
       </Box>
     </Flex>
   );
