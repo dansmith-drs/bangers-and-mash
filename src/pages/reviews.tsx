@@ -1,10 +1,10 @@
-import { AspectRatio, Box, Flex } from "@chakra-ui/react";
-import { graphql } from "gatsby";
-import * as React from "react";
-import { Header } from "../components/Header/Header";
-import { ReviewMap } from "../components/Map/ReviewMap";
-import { Review } from "../components/Review/Review";
-import { RestaurantSearch } from "../components/RestaurantSearch/RestaurantSearch";
+import { AspectRatio, Box, Flex } from '@chakra-ui/react';
+import { graphql } from 'gatsby';
+import * as React from 'react';
+import { Header } from '../components/Header/Header';
+import { ReviewMap } from '../components/Map/ReviewMap';
+import { Review } from '../components/Review/Review';
+import { RestaurantSearch } from '../components/RestaurantSearch/RestaurantSearch';
 
 interface ReviewsPageProps {
   data: ReviewsData;
@@ -23,10 +23,14 @@ interface GoogleSpreadsheetMain {
 export interface ReviewInfo {
   id: string;
   name: string;
-  rating: string;
+  rating: number;
   googleSpreadsheetId: string;
   latitude: number;
   longitude: number;
+  reviewer: string;
+  websiteUrl: string;
+  mainImageUrl: string;
+  writtenReview: string;
 }
 
 const ReviewsPage = ({ data }: ReviewsPageProps) => {
@@ -46,13 +50,13 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
       //   align="center"
       justifyContent="center"
       maxWidth={{
-        xl: "1200px",
+        xl: '1200px',
       }}
       marginLeft="auto"
       marginRight="auto"
     >
       <Header />
-      <div style={{ width: "100%" }}>
+      <div style={{ width: '100%' }}>
         <AspectRatio ratio={16 / 9}>
           <ReviewMap
             reviews={reviews}
@@ -91,6 +95,10 @@ export const pageQuery = graphql`
           rating
           latitude
           longitude
+          websiteUrl
+          mainImageUrl
+          reviewer
+          writtenReview
           googleSpreadsheetId
         }
       }

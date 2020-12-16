@@ -1,14 +1,5 @@
-import {
-  StatGroup,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  HStack,
-  Box,
-} from "@chakra-ui/react";
-import * as React from "react";
+import * as React from 'react';
+import { Stat, StatLabel, StatNumber, StatHelpText } from '@chakra-ui/react';
 
 interface ScoreProps {
   score: number;
