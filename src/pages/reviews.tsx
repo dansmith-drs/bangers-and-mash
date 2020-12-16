@@ -1,16 +1,16 @@
 import { AspectRatio, Box, Flex } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { Header } from '../components/Header/Header';
 import { ReviewMap } from '../components/Map/ReviewMap';
-import { Review } from '../components/Review/Review';
 import { RestaurantSearch } from '../components/RestaurantSearch/RestaurantSearch';
 
 interface ReviewsPageProps {
   data: ReviewsData;
 }
 
-interface ReviewsData {
+export interface ReviewsData {
   allGoogleSpreadsheetMain: GoogleSpreadsheetMain;
 }
 
@@ -37,26 +37,34 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
   const reviews = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
 
   return (
-    <Flex
-      direction="column"
-      //   align="center"
-      justifyContent="center"
-      maxWidth={{
-        xl: '1200px',
-      }}
-      marginLeft="auto"
-      marginRight="auto"
-    >
-      <Header />
-      <div style={{ width: '100%' }}>
-        <AspectRatio ratio={16 / 9}>
-          <ReviewMap reviews={reviews} />
-        </AspectRatio>
-      </div>
-      <Box marginLeft="1rem" marginRight="1rem">
-        <RestaurantSearch reviews={reviews} />
-      </Box>
-    </Flex>
+    <>
+      <Helmet>
+        <title>BandM - Reviews</title>
+        <meta
+          name={`Where you can find all the Bangers and Mash reviews`}
+          content={`Reviews`}
+        />
+      </Helmet>
+      <Flex
+        direction="column"
+        justifyContent="center"
+        maxWidth={{
+          xl: '1200px',
+        }}
+        marginLeft="auto"
+        marginRight="auto"
+      >
+        <Header />
+        <div style={{ width: '100%' }}>
+          <AspectRatio ratio={16 / 9}>
+            <ReviewMap reviews={reviews} />
+          </AspectRatio>
+        </div>
+        <Box marginLeft="1rem" marginRight="1rem">
+          <RestaurantSearch reviews={reviews} />
+        </Box>
+      </Flex>
+    </>
   );
 };
 
@@ -68,6 +76,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          googleSpreadsheetId
           name
           rating
           latitude
@@ -76,7 +85,6 @@ export const pageQuery = graphql`
           mainImageUrl
           reviewer
           writtenReview
-          googleSpreadsheetId
         }
       }
     }

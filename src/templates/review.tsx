@@ -1,62 +1,40 @@
-import { Flex, Heading } from "@chakra-ui/react";
-import { graphql } from "gatsby";
-import * as React from "react";
-import { Header } from "../components/Header/Header";
-import { Scores } from "../components/Review/Scores/Scores";
-import { ReviewInfo } from "../pages/reviews";
+import * as React from 'react';
+import { Flex, Heading } from '@chakra-ui/react';
+import { graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
+import { Header } from '../components/Header/Header';
+import { Scores } from '../components/Review/Scores/Scores';
+import { ReviewInfo, ReviewsData } from '../pages/reviews';
 
-export default function ReviewTemplate({ data }) {
-  console.log(data);
+interface ReviewTemplateProps {
+  data: ReviewsData;
+}
 
+export default function ReviewTemplate({ data }: ReviewTemplateProps) {
+  // There should only ever be one
   const review = data.allGoogleSpreadsheetMain.edges[0].node as ReviewInfo;
 
   return (
     <>
+      <Helmet>
+        <title>BandM - {review.name}</title>
+        <meta
+          name={`Review for ${review.name}`}
+          content={`Review ${review.name}`}
+        />
+      </Helmet>
       <Header />
-      <Flex
-        direction="column"
-        //   align="center"
-        //   justifyContent="center"
-        //   maxWidth={{
-        //     xl: "1200px",
-        //   }}
-        //   marginLeft="auto"
-        //   marginRight="auto"
-      >
+      <Flex direction="column">
         <Heading paddingBottom={1}>{review.name}</Heading>
 
-        <Flex
-          direction="row"
-          // wrap="wrap"
-          // maxWidth={{
-          //   lg: "500px",
-          //   xl: "500px",
-          // }}
-          // align="center"
-          justifyContent="flex-start"
-        >
+        <Flex direction="row" justifyContent="flex-start">
           <Scores />
         </Flex>
-        {/* </Center> */}
-        {review ? review.id : "No review"}
+        {review ? review.id : 'No review'}
       </Flex>
     </>
   );
 }
-
-// query SlugData($slug: String!) {
-//     allGoogleSpreadsheetMain(filter: {fields: {slug: {eq: $slug}}}) {
-//       edges {
-//         node {
-//           googleSpreadsheetId
-//           id
-//         }
-//       }
-//     }
-//   }
-// {
-//     "slug": "/review/82c85caa-f60c-5f21-80b5-2069204c72b1"
-//   }
 
 export const query = graphql`
   query($slug: String!) {

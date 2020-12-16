@@ -1,21 +1,24 @@
-import { graphql } from "gatsby";
-import React from "react";
-import { Box, Text } from "@chakra-ui/react";
-import { Header } from "../components/Header/Header";
+import { graphql } from 'gatsby';
+import * as React from 'react';
+import { Helmet } from 'react-helmet';
+import { Header } from '../components/Header/Header';
 
 export default function Home({ data }) {
-  console.log(data);
   const restaurants = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
 
   return (
     <div>
+      <Helmet>
+        <title>Bangers and Mash</title>
+        <meta
+          name="The home of Bangers and Mash reviews"
+          content="Bangers and Mash"
+        />
+      </Helmet>
       <Header />
       {restaurants.map((restaurant) => (
         <div key={restaurant.id}>{restaurant.name}</div>
       ))}
-      {/* <Box p={8}> */}
-      <Text fontSize="xl">Hello World</Text>
-      {/* </Box> */}
     </div>
   );
 }
@@ -26,9 +29,15 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          googleSpreadsheetId
           name
           rating
-          googleSpreadsheetId
+          latitude
+          longitude
+          websiteUrl
+          mainImageUrl
+          reviewer
+          writtenReview
         }
       }
     }
