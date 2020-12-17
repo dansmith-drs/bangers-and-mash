@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { MdLaunch } from '@react-icons/all-files/md/MdLaunch';
 import { Heading, Link, HStack, Text } from '@chakra-ui/react';
 import { StarRating } from '../StarRating/StarRating';
 
