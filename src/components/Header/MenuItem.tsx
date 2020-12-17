@@ -1,7 +1,6 @@
-import { Text } from "@chakra-ui/react";
-import { Link } from "gatsby";
-
-import * as React from "react";
+import * as React from 'react';
+import { Text, Link } from '@chakra-ui/react';
+import { Link as GatsbyLink } from 'gatsby';
 
 interface MenuItemProps {
   to: string;
@@ -15,7 +14,9 @@ export const MenuItem = ({ isLast, to, children }: MenuItemProps) => {
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
     >
-      <Link to={to}>{children}</Link>
+      <Link as={GatsbyLink} to={to}>
+        {children}
+      </Link>
     </Text>
   );
 };

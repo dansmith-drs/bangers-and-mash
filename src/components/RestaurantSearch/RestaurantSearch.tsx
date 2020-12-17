@@ -1,5 +1,7 @@
 import {
   Box,
+  Text,
+  Center,
   Flex,
   Icon,
   Input,
@@ -17,8 +19,20 @@ interface RestaurantSearchProps {
 
 export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
   const [searchText, setSearchText] = React.useState('');
+
+  const reviewsToDisplay = reviews
+    .filter((review) => {
+      return searchText !== ''
+        ? review.name.toLowerCase().includes(searchText)
+        : true;
+    })
+    .sort((a, b) => (a.name > b.name ? 1 : -1))
+    .map((review) => {
+      return <RestuarantCard key={review.id} reviewInfo={review} />;
+    });
+
   return (
-    <Box padding={2}>
+    <>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -27,30 +41,42 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
         <Input
           type="text"
           placeholder="Search..."
+          isInvalid={!!!reviewsToDisplay.length}
           onChange={(e) => setSearchText(e.currentTarget.value.toLowerCase())}
         />
       </InputGroup>
-      <Flex
-        flexWrap="wrap"
-        justifyContent={{
-          base: 'center',
-          sm: 'center',
-          md: 'space-between',
-          lg: 'space-between',
-          xl: 'space-between',
-        }}
-      >
-        {reviews
-          .filter((review) => {
-            return searchText !== ''
-              ? review.name.toLowerCase().includes(searchText)
-              : true;
-          })
-          .sort((a, b) => (a.name > b.name ? 1 : -1))
-          .map((review) => {
-            return <RestuarantCard key={review.id} reviewInfo={review} />;
-          })}
-      </Flex>
-    </Box>
+      <Box paddingY={2}>
+        <Flex
+          flexWrap="wrap"
+          justifyContent={{
+            base: 'center',
+            sm: 'center',
+            md: 'center',
+            lg: 'space-between',
+            xl: 'space-between',
+          }}
+        >
+          {reviewsToDisplay.length ? (
+            reviewsToDisplay
+          ) : (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              minHeight={'366px'}
+              width={'100%'}
+            >
+              <Box>
+                <Center>
+                  <Text fontSize={'lg'}>No Bangers and Mash found</Text>
+                </Center>
+                <Center>
+                  <Text>Try refining your search</Text>
+                </Center>
+              </Box>
+            </Flex>
+          )}
+        </Flex>
+      </Box>
+    </>
   );
 };

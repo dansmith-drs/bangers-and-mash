@@ -16,14 +16,12 @@ export const HeadlineDetails = ({
 }: HeadlineDetailsProps) => {
   return (
     <>
-      <Heading size="lg" isTruncated={true}>
-        <Link href={websiteUrl} isExternal>
-          <HStack>
-            <span>{name}</span>
-            <MdLaunch />
-          </HStack>
-        </Link>
+      <Heading size="md" isTruncated={true}>
+        {name}
       </Heading>
+      <Link fontSize="xs" color="gray.600" href={websiteUrl} isExternal={true}>
+        <Text isTruncated={true}>{websiteUrl}</Text>
+      </Link>
       <StarRating rating={rating} total={10} />
     </>
   );

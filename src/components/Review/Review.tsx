@@ -1,7 +1,7 @@
-import { Box, Center, Container, Flex, Heading } from "@chakra-ui/react";
-import * as React from "react";
-import { ReviewInfo } from "../../pages/reviews";
-import { Scores } from "./Scores/Scores";
+import { Flex, Heading } from '@chakra-ui/react';
+import * as React from 'react';
+import { ReviewInfo } from '../../pages/reviews';
+import { Scores } from './Scores/Scores';
 
 interface ReviewProps {
   review: ReviewInfo;
@@ -34,7 +34,7 @@ export const Review = ({ review }: ReviewProps) => {
         <Scores />
       </Flex>
       {/* </Center> */}
-      {review ? review.id : "No review"}
+      {review ? review.id : 'No review'}
     </Flex>
   );
 

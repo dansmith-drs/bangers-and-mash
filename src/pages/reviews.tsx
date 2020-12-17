@@ -1,9 +1,16 @@
-import { AspectRatio, Box, Flex } from '@chakra-ui/react';
-import { graphql } from 'gatsby';
 import * as React from 'react';
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  Switch,
+  FormControl,
+  FormLabel,
+} from '@chakra-ui/react';
+import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { Header } from '../components/Header/Header';
 import { ReviewMap } from '../components/Map/ReviewMap';
+import { PageWrapper } from '../components/Page/PageWrapper';
 import { RestaurantSearch } from '../components/RestaurantSearch/RestaurantSearch';
 
 interface ReviewsPageProps {
@@ -34,10 +41,11 @@ export interface ReviewInfo {
 }
 
 const ReviewsPage = ({ data }: ReviewsPageProps) => {
+  const [showMap, setShowMap] = React.useState(true);
   const reviews = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
 
   return (
-    <>
+    <PageWrapper>
       <Helmet>
         <title>BandM - Reviews</title>
         <meta
@@ -45,26 +53,39 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
           content={`Reviews`}
         />
       </Helmet>
-      <Flex
-        direction="column"
-        justifyContent="center"
-        maxWidth={{
-          xl: '1200px',
-        }}
-        marginLeft="auto"
-        marginRight="auto"
-      >
-        <Header />
-        <div style={{ width: '100%' }}>
-          <AspectRatio ratio={16 / 9}>
+      <Box style={{ width: '100%' }}>
+        <Flex
+          justifyContent="flex-end"
+          direction={'row'}
+          alignItems="flex-end"
+          marginRight={2}
+          marginBottom={2}
+        >
+          <Box>
+            <FormControl display="flex" alignItems="center">
+              <FormLabel htmlFor="show-map" mb="0">
+                Show map
+              </FormLabel>
+              <Switch
+                isChecked={showMap}
+                onChange={(e) => {
+                  setShowMap(e.currentTarget.checked);
+                }}
+                id="show-map"
+              />
+            </FormControl>
+          </Box>
+        </Flex>
+        {showMap ? (
+          <AspectRatio ratio={21 / 9} marginBottom={4}>
             <ReviewMap reviews={reviews} />
           </AspectRatio>
-        </div>
-        <Box marginLeft="1rem" marginRight="1rem">
-          <RestaurantSearch reviews={reviews} />
-        </Box>
-      </Flex>
-    </>
+        ) : null}
+      </Box>
+      <Box marginX={2}>
+        <RestaurantSearch reviews={reviews} />
+      </Box>
+    </PageWrapper>
   );
 };
 

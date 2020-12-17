@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Flex, Icon, Heading } from '@chakra-ui/react';
 import { MdClose } from '@react-icons/all-files/md/MdClose';
 import { MdMenu } from '@react-icons/all-files/md/MdMenu';
+import { Link as GatsbyLink } from 'gatsby';
 import { MenuItem } from './MenuItem';
 
 export const Header = () => {
@@ -15,11 +16,25 @@ export const Header = () => {
       w="100%"
       mb={8}
       p={8}
-      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
-      color={['white', 'white', 'primary.700', 'primary.700']}
+      bg={{
+        base: 'primary.500',
+        sm: 'primary.500',
+        md: 'primary.500',
+        lg: 'transparent',
+        xl: 'transparent',
+      }}
+      color={{
+        base: 'white',
+        sm: 'white',
+        md: 'white',
+        lg: 'primary.700',
+        xl: 'primary.700',
+      }}
     >
       <Flex align="center">
-        <Heading size="md">Bangers and Mash</Heading>
+        <Heading size="md">
+          <GatsbyLink to={'/'}>Bangers and Mash</GatsbyLink>
+        </Heading>
       </Flex>
 
       <Box
@@ -44,7 +59,9 @@ export const Header = () => {
         >
           <MenuItem to="/">Home</MenuItem>
           <MenuItem to="/reviews/">Reviews</MenuItem>
-          <MenuItem to="/landing/">Landing</MenuItem>
+          <MenuItem to="/about/" isLast={true}>
+            About
+          </MenuItem>
         </Flex>
       </Box>
     </Flex>

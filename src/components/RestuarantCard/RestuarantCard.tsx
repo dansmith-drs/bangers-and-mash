@@ -15,12 +15,11 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
       w={{
         base: '100%',
         sm: '350px',
-        md: '220px',
+        md: '290px',
         lg: '290px',
         xl: '350px',
       }}
-      marginX="2"
-      marginY="2"
+      margin={2}
       borderWidth="1px"
       borderRadius="20px"
       overflow="hidden"

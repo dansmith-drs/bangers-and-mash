@@ -1,45 +1,17 @@
-import { graphql } from 'gatsby';
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import { Header } from '../components/Header/Header';
+import { Hero } from '../components/Hero/Hero';
+import { PageWrapper } from '../components/Page/PageWrapper';
 
-export default function Home({ data }) {
-  const restaurants = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
-
+export default function Home() {
   return (
-    <div>
-      <Helmet>
-        <title>Bangers and Mash</title>
-        <meta
-          name="The home of Bangers and Mash reviews"
-          content="Bangers and Mash"
-        />
-      </Helmet>
-      <Header />
-      {restaurants.map((restaurant) => (
-        <div key={restaurant.id}>{restaurant.name}</div>
-      ))}
-    </div>
+    <PageWrapper>
+      <Hero
+        title="Bangers and Mash"
+        subtitle="A tradition to be preserved. Kevin and Roger bring you the you insights on the tastiest venues for Bangers and Mash in the Buckinghamshire region."
+        ctaText="Show me the Reviews"
+        ctaLink="/reviews"
+        image="https://www.daringgourmet.com/wp-content/uploads/2019/09/Bangers-and-Mash-3-square-2.jpg"
+      />
+    </PageWrapper>
   );
 }
-
-export const pageQuery = graphql`
-  query {
-    allGoogleSpreadsheetMain {
-      edges {
-        node {
-          id
-          googleSpreadsheetId
-          name
-          rating
-          latitude
-          longitude
-          websiteUrl
-          mainImageUrl
-          reviewer
-          writtenReview
-        }
-      }
-    }
-  }
-`;
