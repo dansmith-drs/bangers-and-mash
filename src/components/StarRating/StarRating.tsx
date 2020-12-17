@@ -31,5 +31,9 @@ export const StarRating = ({ rating, total }: StarRatingProps) => {
 
   const allStars = fullStars.concat(halfStar, emptyStars);
 
-  return <HStack spacing="0px">{allStars}</HStack>;
+  return (
+    <HStack spacing="0px" color="primary.600">
+      {allStars}
+    </HStack>
+  );
 };

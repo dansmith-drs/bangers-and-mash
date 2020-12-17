@@ -11,7 +11,7 @@ export const ReviewButton = ({ reviewId }: ReviewButtonProps) => {
     <Button
       as={GatsbyLink}
       to={`/review/${reviewId}`}
-      colorScheme="green"
+      colorScheme="primary"
       size="xs"
     >
       Review

@@ -15,8 +15,8 @@ export const Header = () => {
       w="100%"
       mb={8}
       p={8}
-      bg={['red.500', 'red.500', 'transparent', 'transparent']}
-      color={['white', 'white', 'red.700', 'red.700']}
+      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
+      color={['white', 'white', 'primary.700', 'primary.700']}
     >
       <Flex align="center">
         <Heading size="md">Bangers and Mash</Heading>
