@@ -11,9 +11,15 @@ interface RestuarantCardProps {
 export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
   return (
     <Flex
-      width="xs"
-      maxW="xs"
-      marginLeft="2"
+      minW={'100px'}
+      w={{
+        base: '100%',
+        sm: '350px',
+        md: '220px',
+        lg: '290px',
+        xl: '350px',
+      }}
+      marginX="2"
       marginY="2"
       borderWidth="1px"
       borderRadius="20px"
@@ -21,13 +27,11 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
       boxShadow="md"
       height={'350px'}
       direction="column"
-      justifyContent="space-between"
     >
       <Box>
         <Image
-          height="auto"
           width="100%"
-          maxHeight="150px"
+          height="150px"
           objectFit="cover"
           src={
             reviewInfo.mainImageUrl ||

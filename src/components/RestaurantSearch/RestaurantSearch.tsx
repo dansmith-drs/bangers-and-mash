@@ -30,7 +30,16 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
           onChange={(e) => setSearchText(e.currentTarget.value.toLowerCase())}
         />
       </InputGroup>
-      <Flex flexWrap="wrap" justifyContent="space-between">
+      <Flex
+        flexWrap="wrap"
+        justifyContent={{
+          base: 'center',
+          sm: 'center',
+          md: 'space-between',
+          lg: 'space-between',
+          xl: 'space-between',
+        }}
+      >
         {reviews
           .filter((review) => {
             return searchText !== ''
