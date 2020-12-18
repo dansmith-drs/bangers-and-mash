@@ -40,7 +40,7 @@ export const ReviewMarker = ({ review }: ReviewMarkerProps) => (
             <HeadlineDetails
               name={review.name}
               websiteUrl={review.websiteUrl}
-              rating={review.rating}
+              rating={review.overallRating}
             />
           </PopoverHeader>
           <PopoverBody>

@@ -6,6 +6,7 @@ interface HeadlineDetailsProps {
   websiteUrl: string;
   name: string;
   rating: number;
+  nameSize?: string;
 }
 
 export const HeadlineDetails = ({
@@ -15,7 +16,7 @@ export const HeadlineDetails = ({
 }: HeadlineDetailsProps) => {
   return (
     <>
-      <Heading size="md" isTruncated={true}>
+      <Heading size="lg" isTruncated={true} noOfLines={2}>
         {name}
       </Heading>
       <Link fontSize="xs" color="gray.600" href={websiteUrl} isExternal={true}>

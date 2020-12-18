@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Box, Image, Text, Button, Flex } from '@chakra-ui/react';
+import { Box, Image, Text, Flex } from '@chakra-ui/react';
 import { ReviewInfo } from '../../pages/reviews';
 import { HeadlineDetails } from './HeadlineDetails';
 import { ReviewButton } from '../ReviewButton/ReviewButton';
+import { Link as GatsbyLink, navigate } from 'gatsby';
 
 interface RestuarantCardProps {
   reviewInfo: ReviewInfo;
@@ -24,8 +25,9 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
       borderRadius="20px"
       overflow="hidden"
       boxShadow="md"
-      height={'350px'}
+      height={'390px'}
       direction="column"
+      justifyContent="space-between"
     >
       <Box>
         <Image
@@ -36,12 +38,16 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
             reviewInfo.mainImageUrl ||
             'https://i2-prod.bathchronicle.co.uk/whats-on/food-drink/article31144.ece/ALTERNATES/s810/pub.jpg'
           }
+          cursor="pointer"
+          onClick={() => {
+            navigate(`/review/${reviewInfo.id}`);
+          }}
         />
         <Box p={3}>
           <HeadlineDetails
             name={reviewInfo.name}
             websiteUrl={reviewInfo.websiteUrl}
-            rating={reviewInfo.rating}
+            rating={reviewInfo.overallRating}
           />
           <Text paddingTop={2} noOfLines={3} fontSize="sm" isTruncated={true}>
             {reviewInfo.writtenReview}

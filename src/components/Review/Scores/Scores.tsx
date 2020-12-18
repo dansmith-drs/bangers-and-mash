@@ -1,27 +1,22 @@
-import {
-  StatGroup,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  HStack,
-  Box,
-} from "@chakra-ui/react";
-import * as React from "react";
-import { Score } from "./Score";
+import { Box, Flex, StatGroup } from '@chakra-ui/react';
+import * as React from 'react';
+import { Score } from './Score';
 
-export const Scores = () => {
+interface ScoreProps {
+  scores: ScoreInfo[];
+}
+
+export interface ScoreInfo {
+  name: string;
+  score: number;
+}
+
+export const Scores = ({ scores }: ScoreProps) => {
   return (
-    <>
-      <Score name="Parking" score={9} />
-      <Score name="Service" score={7} />
-      <Score name="Service" score={7} />
-      {/* <Score name="Parking" score={9} />
-      <Score name="Parking" score={9} />
-      <Score name="Service" score={7} />
-      <Score name="Service" score={7} />
-      <Score name="Parking" score={9} /> */}
-    </>
+    <StatGroup>
+      {scores.map((scoreInfo) => (
+        <Score name={scoreInfo.name} score={scoreInfo.score} />
+      ))}
+    </StatGroup>
   );
 };

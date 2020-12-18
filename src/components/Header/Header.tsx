@@ -53,8 +53,8 @@ export const Header = () => {
       >
         <Flex
           align={['center', 'center', 'center', 'center']}
-          justify={['center', 'center', 'flex-end', 'flex-end']}
-          direction={['column', 'column', 'row', 'row']}
+          justify={['center', 'space-between', 'flex-end', 'flex-end']}
+          direction={['column', 'row', 'row', 'row']}
           pt={[4, 4, 0, 0]}
         >
           <MenuItem to="/">Home</MenuItem>

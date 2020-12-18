@@ -30,14 +30,16 @@ interface GoogleSpreadsheetMain {
 export interface ReviewInfo {
   id: string;
   name: string;
-  rating: number;
+  overallRating: number;
   googleSpreadsheetId: string;
   latitude: number;
   longitude: number;
-  reviewer: string;
   websiteUrl: string;
   mainImageUrl: string;
   writtenReview: string;
+  fareScore: number;
+  serviceScore: number;
+  parkingScore: number;
 }
 
 const ReviewsPage = ({ data }: ReviewsPageProps) => {
@@ -61,7 +63,7 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
           marginRight={2}
           marginBottom={2}
         >
-          <Box>
+          <Box marginX={8}>
             <FormControl display="flex" alignItems="center">
               <FormLabel htmlFor="show-map" mb="0">
                 Show map
@@ -82,7 +84,7 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
           </AspectRatio>
         ) : null}
       </Box>
-      <Box marginX={2}>
+      <Box marginX={8}>
         <RestaurantSearch reviews={reviews} />
       </Box>
     </PageWrapper>
@@ -99,13 +101,15 @@ export const pageQuery = graphql`
           id
           googleSpreadsheetId
           name
-          rating
+          overallRating
           latitude
           longitude
           websiteUrl
           mainImageUrl
-          reviewer
           writtenReview
+          fareScore
+          serviceScore
+          parkingScore
         }
       }
     }
