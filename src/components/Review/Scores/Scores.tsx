@@ -15,7 +15,11 @@ export const Scores = ({ scores }: ScoreProps) => {
   return (
     <StatGroup>
       {scores.map((scoreInfo) => (
-        <Score name={scoreInfo.name} score={scoreInfo.score} />
+        <Score
+          key={scoreInfo.name}
+          name={scoreInfo.name}
+          score={scoreInfo.score}
+        />
       ))}
     </StatGroup>
   );
