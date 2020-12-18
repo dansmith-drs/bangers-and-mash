@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Box, Image, Flex, Heading, Text } from '@chakra-ui/react';
-import { graphql } from 'gatsby';
+import { Box, Image, Flex, Heading, Text, Button } from '@chakra-ui/react';
+import { graphql, navigate } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { ScoreInfo, Scores } from '../components/Review/Scores/Scores';
 import { ReviewInfo, ReviewsData } from '../pages/reviews';
 import { PageWrapper } from '../components/Page/PageWrapper';
 import { HeadlineDetails } from '../components/RestuarantCard/HeadlineDetails';
 import { ParagraphNewLine } from '../components/ParagraphNewLine/ParagraphNewLine';
+import { MdChevronLeft } from '@react-icons/all-files/md/MdChevronLeft';
 
 interface ReviewTemplateProps {
   data: ReviewsData;
@@ -36,12 +37,22 @@ export default function ReviewTemplate({ data }: ReviewTemplateProps) {
       <Helmet>
         <title>BM - {review.name}</title>
         <meta
-          name={`Review for ${review.name}`}
-          content={`Review ${review.name}`}
+          name="description"
+          content="The home of Bangers and Mash reviews for Buckinghamshire"
         />
       </Helmet>
       <PageWrapper>
         <Box marginX={8}>
+          <Button
+            leftIcon={<MdChevronLeft />}
+            colorScheme="primary"
+            variant="outline"
+            marginBottom={4}
+            size="sm"
+            onClick={() => navigate('/reviews')}
+          >
+            Back
+          </Button>
           <HeadlineDetails
             name={review.name}
             nameSize={'lg'}
