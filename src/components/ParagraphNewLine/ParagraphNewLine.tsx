@@ -5,6 +5,6 @@ interface ParagraphNewLineProps {
   text: string;
 }
 export const ParagraphNewLine = ({ text }: ParagraphNewLineProps) => {
-  const newText = text.split('\\n').map((str) => <Text>{str}</Text>);
+  const newText = text.split('\\n').map((str, i) => <Text key={i}>{str}</Text>);
   return <>{newText}</>;
 };

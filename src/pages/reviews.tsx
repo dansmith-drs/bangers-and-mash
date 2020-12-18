@@ -30,13 +30,14 @@ interface GoogleSpreadsheetMain {
 export interface ReviewInfo {
   id: string;
   name: string;
-  overallRating: number;
   googleSpreadsheetId: string;
   latitude: number;
   longitude: number;
   websiteUrl: string;
   mainImageUrl: string;
   writtenReview: string;
+  reviewDate: string;
+  overallRating: number;
   fareScore: number;
   serviceScore: number;
   parkingScore: number;

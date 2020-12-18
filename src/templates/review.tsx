@@ -31,8 +31,6 @@ export default function ReviewTemplate({ data }: ReviewTemplateProps) {
     };
   });
 
-  console.log(scoresInfo);
-
   return (
     <>
       <Helmet>
@@ -69,7 +67,7 @@ export default function ReviewTemplate({ data }: ReviewTemplateProps) {
             <Box width={{ base: '100%', md: '50%' }}>
               <Heading size="md">Review</Heading>
               <Text marginBottom={4} color="gray.600" fontSize={'sm'}>
-                1st October 2020
+                {new Date(review.reviewDate).toDateString()}
               </Text>
               <ParagraphNewLine text={review.writtenReview} />
             </Box>
@@ -104,8 +102,9 @@ export const query = graphql`
           mainImageUrl
           name
           websiteUrl
-          overallRating
           writtenReview
+          reviewDate
+          overallRating
           fareScore
           serviceScore
           parkingScore
