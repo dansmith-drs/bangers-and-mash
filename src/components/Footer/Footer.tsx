@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Box, Center, Link, Text } from '@chakra-ui/react';
-import { VscGithub } from '@react-icons/all-files/Vsc/VscGithub';
 
 export const Footer = () => {
   return (
@@ -17,7 +16,7 @@ export const Footer = () => {
           isExternal={true}
           href={'https://github.com/dansmith-drs/bangers-and-mash'}
         >
-          <VscGithub />
+          github
         </Link>
       </Center>
     </Box>
