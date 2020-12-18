@@ -13,21 +13,21 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { GiKnifeFork } from '@react-icons/all-files/gi/GiKnifeFork';
-import { ChildComponentProps } from 'google-map-react';
 import { ReviewInfo } from '../../pages/reviews';
 import { HeadlineDetails } from '../RestuarantCard/HeadlineDetails';
 import { ReviewButton } from '../ReviewButton/ReviewButton';
+import { PigeonProps } from 'pigeon-maps/src/types';
 
-interface ReviewMarkerProps extends ChildComponentProps {
+interface ReviewMarkerProps extends PigeonProps {
   review: ReviewInfo;
 }
 
-export const ReviewMarker = ({ review }: ReviewMarkerProps) => (
-  <>
+export const ReviewMarker = ({ review, left, top }: ReviewMarkerProps) => (
+  <Box position="absolute" left={left} top={top}>
     <Popover trigger="click">
       <PopoverTrigger>
         <IconButton
-          colorScheme="gray"
+          colorScheme="primary"
           aria-label="View restaurant review"
           icon={<GiKnifeFork />}
         />
@@ -54,5 +54,5 @@ export const ReviewMarker = ({ review }: ReviewMarkerProps) => (
         </PopoverContent>
       </Portal>
     </Popover>
-  </>
+  </Box>
 );

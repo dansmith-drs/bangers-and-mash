@@ -1,5 +1,6 @@
 import * as React from 'react';
-import GoogleMapReact, { MapOptions, Maps } from 'google-map-react';
+import Map from 'pigeon-maps';
+import { Box } from '@chakra-ui/react';
 import { ReviewInfo } from '../../pages/reviews';
 import { ReviewMarker } from './Marker';
 
@@ -11,32 +12,28 @@ const HAZLEMERE = {
   lng: -0.7159076956570684,
 };
 
-const createMapOptions = (maps: Maps): MapOptions => {
-  return {
-    clickableIcons: false,
-    fullscreenControl: false,
-  };
+const tileProvider = (x, y, z, dpr) => {
+  return `https://api.maptiler.com/maps/basic/256/${z}/${x}/${y}${
+    dpr >= 2 ? '@2x' : ''
+  }.png?key=${process.env.MAP_TILER_KEY}`;
 };
 
 export const ReviewMap = ({ reviews }: ReviewMapProps) => {
   return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '100%', width: '100%' }}>
-      <GoogleMapReact
-        //   bootstrapURLKeys={{ key: "asd" /* YOUR KEY HERE */ }}
-        defaultCenter={HAZLEMERE}
+    <Box height="100%" width="100%">
+      <Map
+        defaultCenter={[HAZLEMERE.lat, HAZLEMERE.lng]}
         defaultZoom={15}
-        options={createMapOptions}
+        provider={tileProvider}
       >
         {reviews.map((review) => (
           <ReviewMarker
             key={review.id}
-            lat={review.latitude}
-            lng={review.longitude}
+            anchor={[review.latitude, review.longitude]}
             review={review}
           />
         ))}
-      </GoogleMapReact>
-    </div>
+      </Map>
+    </Box>
   );
 };

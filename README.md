@@ -12,3 +12,5 @@ enable https://console.developers.google.com/apis/library/sheets.googleapis.com
 
 ThemeCreation
 https://smart-swatch.netlify.app/#455c43
+
+https://cloud.maptiler.com/account/analytics
