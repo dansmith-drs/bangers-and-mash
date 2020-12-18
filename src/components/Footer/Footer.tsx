@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Center, Link, Text } from '@chakra-ui/react';
-import { SiGithub } from '@react-icons/all-files/Si/SiGithub';
+import { VscGithub } from '@react-icons/all-files/Vsc/VscGithub';
 
 export const Footer = () => {
   return (
@@ -17,7 +17,7 @@ export const Footer = () => {
           isExternal={true}
           href={'https://github.com/dansmith-drs/bangers-and-mash'}
         >
-          <SiGithub />
+          <VscGithub />
         </Link>
       </Center>
     </Box>
