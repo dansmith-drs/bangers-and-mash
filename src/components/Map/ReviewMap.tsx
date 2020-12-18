@@ -15,7 +15,7 @@ const HAZLEMERE = {
 const tileProvider = (x, y, z, dpr) => {
   return `https://api.maptiler.com/maps/basic/256/${z}/${x}/${y}${
     dpr >= 2 ? '@2x' : ''
-  }.png?key=${process.env.MAP_TILER_KEY}`;
+  }.png?key=${process.env.GATSBY_MAP_TILER_KEY}`;
 };
 
 export const ReviewMap = ({ reviews }: ReviewMapProps) => {
