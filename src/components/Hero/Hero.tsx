@@ -6,6 +6,7 @@ import {
   Heading,
   Image,
   Link,
+  ScaleFade,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -27,6 +28,13 @@ export const Hero = ({
   ctaText,
   image,
 }: HeroProps) => {
+  const [fadeImage, setFadeImage] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setFadeImage(true);
+    }, 1000);
+  });
   return (
     <Flex
       align="center"
@@ -84,7 +92,9 @@ export const Hero = ({
         ></Text>
       </Stack>
       <Box w={{ base: '80%', sm: '60%', md: '50%' }} mb={{ base: 12, md: 0 }}>
-        <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+        <ScaleFade initialScale={0.9} in={fadeImage}>
+          <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+        </ScaleFade>
       </Box>
     </Flex>
   );

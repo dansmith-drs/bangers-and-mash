@@ -25,7 +25,7 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
       borderRadius="20px"
       overflow="hidden"
       boxShadow="md"
-      height={'390px'}
+      height={'400px'}
       direction="column"
       justifyContent="space-between"
     >

@@ -7,11 +7,13 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Fade,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { ReviewInfo } from '../../pages/reviews';
 import { RestuarantCard } from '../RestuarantCard/RestuarantCard';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import debounce from 'lodash-es/debounce';
 
 interface RestaurantSearchProps {
   reviews: ReviewInfo[];
@@ -19,6 +21,20 @@ interface RestaurantSearchProps {
 
 export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
   const [searchText, setSearchText] = React.useState('');
+  const [animateNotFound, setAnimateNotFound] = React.useState(true);
+
+  const handleChange = (e) => {
+    setAnimateNotFound(false);
+    debounceSearch(e.currentTarget.value.toLowerCase());
+  };
+
+  const debounceSearch = React.useCallback(
+    debounce((searchValue: string) => {
+      setSearchText(searchValue);
+      setAnimateNotFound(true);
+    }, 500),
+    []
+  );
 
   const reviewsToDisplay = reviews
     .filter((review) => {
@@ -28,7 +44,7 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
     })
     .sort((a, b) => (a.name > b.name ? 1 : -1))
     .map((review) => {
-      return <RestuarantCard key={review.id} reviewInfo={review} />;
+      return <RestuarantCard reviewInfo={review} />;
     });
 
   return (
@@ -42,7 +58,7 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
           type="text"
           placeholder="Search..."
           isInvalid={!!!reviewsToDisplay.length}
-          onChange={(e) => setSearchText(e.currentTarget.value.toLowerCase())}
+          onChange={handleChange}
         />
       </InputGroup>
       <Box paddingY={2}>
@@ -65,14 +81,16 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
               minHeight={'366px'}
               width={'100%'}
             >
-              <Box>
-                <Center>
-                  <Text fontSize={'lg'}>No Bangers and Mash found</Text>
-                </Center>
-                <Center>
-                  <Text>Try refining your search</Text>
-                </Center>
-              </Box>
+              <Fade in={animateNotFound} unmountOnExit={true}>
+                <Box>
+                  <Center>
+                    <Text fontSize={'lg'}>No Bangers and Mash found</Text>
+                  </Center>
+                  <Center>
+                    <Text>Try refining your search</Text>
+                  </Center>
+                </Box>
+              </Fade>
             </Flex>
           )}
         </Flex>

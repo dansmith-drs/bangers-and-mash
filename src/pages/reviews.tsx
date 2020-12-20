@@ -6,6 +6,7 @@ import {
   Switch,
   FormControl,
   FormLabel,
+  Collapse,
 } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
@@ -79,11 +80,11 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
             </FormControl>
           </Box>
         </Flex>
-        {showMap ? (
+        <Collapse in={showMap} animateOpacity>
           <AspectRatio ratio={21 / 9} marginBottom={4}>
             <ReviewMap reviews={reviews} />
           </AspectRatio>
-        ) : null}
+        </Collapse>
       </Box>
       <Box marginX={8}>
         <RestaurantSearch reviews={reviews} />
