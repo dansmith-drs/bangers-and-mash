@@ -18,7 +18,7 @@ export const NotFound = () => {
         <title>BM - Not Found</title>
         <meta
           name="description"
-          content="The home of Bangers and Mash reviews for Buckinghamshire"
+          content="The home of Bangers and Mash reviews"
         />
       </Helmet>
       <FaRegSadCry size={200} />

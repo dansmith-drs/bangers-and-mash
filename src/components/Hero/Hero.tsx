@@ -10,8 +10,9 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { Link as GatsbyLink } from 'gatsby';
+import { navigate } from 'gatsby';
 import { MdChevronRight } from '@react-icons/all-files/md/MdChevronRight';
+import { FADE_IMAGE_TIMEOUT } from '../../utils/constants';
 
 interface HeroProps {
   title: string;
@@ -33,7 +34,7 @@ export const Hero = ({
   React.useEffect(() => {
     setTimeout(() => {
       setFadeImage(true);
-    }, 1000);
+    }, FADE_IMAGE_TIMEOUT);
   });
   return (
     <Flex
@@ -70,19 +71,20 @@ export const Hero = ({
         >
           {subtitle}
         </Heading>
-        <Link as={GatsbyLink} to={ctaLink}>
-          <Button
-            colorScheme="primary"
-            borderRadius="8px"
-            py="4"
-            px="4"
-            lineHeight="1"
-            size="md"
-            rightIcon={<MdChevronRight />}
-          >
-            {ctaText}
-          </Button>
-        </Link>
+        <Button
+          colorScheme="primary"
+          borderRadius="8px"
+          py="4"
+          px="4"
+          lineHeight="1"
+          size="md"
+          rightIcon={<MdChevronRight />}
+          onClick={() => {
+            navigate(ctaLink);
+          }}
+        >
+          {ctaText}
+        </Button>
         <Text
           fontSize="xs"
           mt={2}

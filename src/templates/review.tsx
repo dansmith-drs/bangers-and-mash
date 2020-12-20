@@ -38,7 +38,7 @@ export default function ReviewTemplate({ data }: ReviewTemplateProps) {
         <title>BM - {review.name}</title>
         <meta
           name="description"
-          content="The home of Bangers and Mash reviews for Buckinghamshire"
+          content="The home of Bangers and Mash reviews"
         />
       </Helmet>
       <PageWrapper>

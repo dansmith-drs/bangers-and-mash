@@ -54,7 +54,7 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
         <title>BandM - Reviews</title>
         <meta
           name="description"
-          content="The home of Bangers and Mash reviews for Buckinghamshire"
+          content="The home of Bangers and Mash reviews"
         />
       </Helmet>
       <Box style={{ width: '100%' }}>

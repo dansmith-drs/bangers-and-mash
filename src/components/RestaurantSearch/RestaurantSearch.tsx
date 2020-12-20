@@ -14,6 +14,7 @@ import { ReviewInfo } from '../../pages/reviews';
 import { RestuarantCard } from '../RestuarantCard/RestuarantCard';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import debounce from 'lodash-es/debounce';
+import { DEBOUNCE_TIMEOUT } from '../../utils/constants';
 
 interface RestaurantSearchProps {
   reviews: ReviewInfo[];
@@ -32,7 +33,7 @@ export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
     debounce((searchValue: string) => {
       setSearchText(searchValue);
       setAnimateNotFound(true);
-    }, 500),
+    }, DEBOUNCE_TIMEOUT),
     []
   );
 
