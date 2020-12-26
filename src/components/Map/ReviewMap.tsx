@@ -8,8 +8,8 @@ interface ReviewMapProps {
   reviews: ReviewInfo[];
 }
 const HAZLEMERE = {
-  lat: 51.64751388812557,
-  lng: -0.7159076956570684,
+  lat: 51.66070418731679,
+  lng: -0.8959715284727613,
 };
 
 const tileProvider = (x, y, z, dpr) => {
@@ -23,7 +23,7 @@ export const ReviewMap = ({ reviews }: ReviewMapProps) => {
     <Box height="100%" width="100%">
       <Map
         defaultCenter={[HAZLEMERE.lat, HAZLEMERE.lng]}
-        defaultZoom={15}
+        defaultZoom={10}
         provider={tileProvider}
       >
         {reviews.map((review) => (

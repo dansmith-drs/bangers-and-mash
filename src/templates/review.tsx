@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Image, Flex, Heading, Text, Button } from '@chakra-ui/react';
 import { graphql, navigate } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { ScoreInfo, Scores } from '../components/Review/Scores/Scores';
+import { ScoreInfo, Scores } from '../components/Scores/Scores';
 import { ReviewInfo, ReviewsData } from '../pages/reviews';
 import { PageWrapper } from '../components/Page/PageWrapper';
 import { HeadlineDetails } from '../components/RestuarantCard/HeadlineDetails';
