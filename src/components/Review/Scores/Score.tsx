@@ -17,7 +17,7 @@ export const Score = ({ score, name, total = 10 }: ScoreProps) => {
   return (
     <Stat>
       <StatLabel>{name}</StatLabel>
-      <StatNumber>{score}</StatNumber>
+      <StatNumber>{score.toFixed(1)}</StatNumber>
       <StatHelpText>out of {total}</StatHelpText>
     </Stat>
   );

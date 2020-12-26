@@ -117,8 +117,9 @@ export const query = graphql`
           reviewDate
           overallRating
           fareScore
-          serviceScore
           parkingScore
+          ambienceScore
+          serviceScore
         }
       }
     }
