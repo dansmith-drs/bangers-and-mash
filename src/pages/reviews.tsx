@@ -81,7 +81,7 @@ const ReviewsPage = ({ data }: ReviewsPageProps) => {
           </Box>
         </Flex>
         <Collapse in={showMap} animateOpacity>
-          <AspectRatio ratio={21 / 9} marginBottom={4}>
+          <AspectRatio ratio={{ base: 21 / 9, md: 21 / 6 }} marginBottom={4}>
             <ReviewMap reviews={reviews} />
           </AspectRatio>
         </Collapse>
