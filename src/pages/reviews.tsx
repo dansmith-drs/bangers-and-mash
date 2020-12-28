@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet';
 import { ReviewMap } from '../components/Map/ReviewMap';
 import { PageWrapper } from '../components/Page/PageWrapper';
 import { RestaurantSearch } from '../components/RestaurantSearch/RestaurantSearch';
+import { xor } from 'lodash-es';
 
 interface ReviewsPageProps {
   data: ReviewsData;
@@ -28,9 +29,10 @@ interface GoogleSpreadsheetMain {
   }[];
 }
 
-export interface ReviewInfo {
+interface ReviewInfo {
   id: string;
   name: string;
+  subHeading: string;
   googleSpreadsheetId: string;
   latitude: number;
   longitude: number;
@@ -44,9 +46,15 @@ export interface ReviewInfo {
   parkingScore: number;
 }
 
+export interface ReviewInfoWithRank extends ReviewInfo {
+  rank: number;
+}
+
 const ReviewsPage = ({ data }: ReviewsPageProps) => {
   const [showMap, setShowMap] = React.useState(true);
-  const reviews = data.allGoogleSpreadsheetMain.edges.map((x) => x.node);
+  const reviews: ReviewInfoWithRank[] = data.allGoogleSpreadsheetMain.edges
+    .sort((a, b) => (a.node.overallRating < b.node.overallRating ? 1 : -1))
+    .map((x, i) => ({ ...x.node, rank: i + 1 }));
 
   return (
     <PageWrapper>
@@ -103,6 +111,7 @@ export const pageQuery = graphql`
           id
           googleSpreadsheetId
           name
+          subHeading
           overallRating
           latitude
           longitude

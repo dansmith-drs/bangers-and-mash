@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Map from 'pigeon-maps';
 import { Box } from '@chakra-ui/react';
-import { ReviewInfo } from '../../pages/reviews';
+import { ReviewInfoWithRank } from '../../pages/reviews';
 import { ReviewMarker } from './Marker';
 
 interface ReviewMapProps {
-  reviews: ReviewInfo[];
+  reviews: ReviewInfoWithRank[];
 }
-const HAZLEMERE = {
+const MAP_CENTRE = {
   lat: 51.66070418731679,
   lng: -0.8959715284727613,
 };
@@ -22,7 +22,7 @@ export const ReviewMap = ({ reviews }: ReviewMapProps) => {
   return (
     <Box height="100%" width="100%">
       <Map
-        defaultCenter={[HAZLEMERE.lat, HAZLEMERE.lng]}
+        defaultCenter={[MAP_CENTRE.lat, MAP_CENTRE.lng]}
         defaultZoom={10}
         provider={tileProvider}
       >
@@ -31,6 +31,7 @@ export const ReviewMap = ({ reviews }: ReviewMapProps) => {
             key={review.id}
             anchor={[review.latitude, review.longitude]}
             review={review}
+            totalReviews={reviews.length}
           />
         ))}
       </Map>

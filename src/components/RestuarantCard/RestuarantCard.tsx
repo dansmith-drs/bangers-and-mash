@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { Box, Image, Text, Flex } from '@chakra-ui/react';
-import { ReviewInfo } from '../../pages/reviews';
+import { ReviewInfoWithRank } from '../../pages/reviews';
 import { HeadlineDetails } from './HeadlineDetails';
 import { ReviewButton } from '../ReviewButton/ReviewButton';
-import { Link as GatsbyLink, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 
 interface RestuarantCardProps {
-  reviewInfo: ReviewInfo;
+  reviewInfo: ReviewInfoWithRank;
+  totalReviews: number;
 }
 
-export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
+export const RestuarantCard = ({
+  reviewInfo,
+  totalReviews,
+}: RestuarantCardProps) => {
   return (
     <Flex
       minW={'100px'}
@@ -25,7 +29,7 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
       borderRadius="20px"
       overflow="hidden"
       boxShadow="md"
-      height={'400px'}
+      height={'450px'}
       direction="column"
       justifyContent="space-between"
     >
@@ -46,8 +50,11 @@ export const RestuarantCard = ({ reviewInfo }: RestuarantCardProps) => {
         <Box p={3}>
           <HeadlineDetails
             name={reviewInfo.name}
+            subHeading={reviewInfo.subHeading}
             websiteUrl={reviewInfo.websiteUrl}
             rating={reviewInfo.overallRating}
+            rank={reviewInfo.rank}
+            totalReviews={totalReviews}
           />
           <Text paddingTop={2} noOfLines={3} fontSize="sm" isTruncated={true}>
             {reviewInfo.writtenReview}

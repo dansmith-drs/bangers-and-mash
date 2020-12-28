@@ -13,16 +13,22 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { GiKnifeFork } from '@react-icons/all-files/gi/GiKnifeFork';
-import { ReviewInfo } from '../../pages/reviews';
+import { ReviewInfoWithRank } from '../../pages/reviews';
 import { HeadlineDetails } from '../RestuarantCard/HeadlineDetails';
 import { ReviewButton } from '../ReviewButton/ReviewButton';
 import { PigeonProps } from 'pigeon-maps/src/types';
 
 interface ReviewMarkerProps extends PigeonProps {
-  review: ReviewInfo;
+  review: ReviewInfoWithRank;
+  totalReviews: number;
 }
 
-export const ReviewMarker = ({ review, left, top }: ReviewMarkerProps) => (
+export const ReviewMarker = ({
+  review,
+  left,
+  top,
+  totalReviews,
+}: ReviewMarkerProps) => (
   <Box position="absolute" left={left} top={top}>
     <Popover trigger="click">
       <PopoverTrigger>
@@ -39,8 +45,11 @@ export const ReviewMarker = ({ review, left, top }: ReviewMarkerProps) => (
           <PopoverHeader>
             <HeadlineDetails
               name={review.name}
+              subHeading={review.subHeading}
               websiteUrl={review.websiteUrl}
               rating={review.overallRating}
+              rank={review.rank}
+              totalReviews={totalReviews}
             />
           </PopoverHeader>
           <PopoverBody>
