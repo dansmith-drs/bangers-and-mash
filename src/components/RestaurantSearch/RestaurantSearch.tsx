@@ -32,7 +32,7 @@ enum SortDirection {
 export const RestaurantSearch = ({ reviews }: RestaurantSearchProps) => {
   const [searchText, setSearchText] = React.useState('');
   const [animateNotFound, setAnimateNotFound] = React.useState(true);
-  const [sortState, setSortState] = React.useState(SortDirection.AlphaDesc);
+  const [sortState, setSortState] = React.useState(SortDirection.RankDesc);
 
   const handleSearchChange = (e) => {
     setAnimateNotFound(false);
