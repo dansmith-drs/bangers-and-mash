@@ -23,7 +23,7 @@ export interface ReviewsData {
   allGoogleSpreadsheetMain: GoogleSpreadsheetMain;
 }
 
-interface GoogleSpreadsheetMain {
+export interface GoogleSpreadsheetMain {
   edges: {
     node: ReviewInfo;
   }[];

@@ -3,19 +3,34 @@ import { Box, Image, Flex, Heading, Text, Button } from '@chakra-ui/react';
 import { graphql, navigate } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { ScoreInfo, Scores } from '../components/Scores/Scores';
-import { ReviewInfo, ReviewsData } from '../pages/reviews';
+import {
+  GoogleSpreadsheetMain,
+  ReviewInfoWithRank,
+  ReviewsData,
+} from '../pages/reviews';
 import { PageWrapper } from '../components/Page/PageWrapper';
 import { HeadlineDetails } from '../components/RestuarantCard/HeadlineDetails';
 import { ParagraphNewLine } from '../components/ParagraphNewLine/ParagraphNewLine';
 import { MdChevronLeft } from '@react-icons/all-files/md/MdChevronLeft';
 
 interface ReviewTemplateProps {
-  data: ReviewsData;
+  data: ReviewsData & { allReviews: GoogleSpreadsheetMain };
 }
 
 export default function ReviewTemplate({ data }: ReviewTemplateProps) {
+  const allReviews: ReviewInfoWithRank[] = data.allReviews.edges
+    .sort((a, b) => (a.node.overallRating < b.node.overallRating ? 1 : -1))
+    .map((x, i) => ({ ...x.node, rank: i + 1 }));
+
   // There should only ever be one
-  const review = data.allGoogleSpreadsheetMain.edges[0].node as ReviewInfo;
+  const review: ReviewInfoWithRank = {
+    ...data.allGoogleSpreadsheetMain.edges[0].node,
+    rank:
+      allReviews.find(
+        (xReview) =>
+          xReview.id === data.allGoogleSpreadsheetMain.edges[0].node.id
+      ).rank || -1,
+  };
 
   const capitalize = (s) => {
     if (typeof s !== 'string') return '';
@@ -58,6 +73,9 @@ export default function ReviewTemplate({ data }: ReviewTemplateProps) {
             nameSize={'lg'}
             rating={review.overallRating}
             websiteUrl={review.websiteUrl}
+            totalReviews={allReviews.length}
+            rank={review.rank}
+            subHeading={review.subHeading}
           />
           <Box paddingTop={4}>
             <Scores scores={scoresInfo} />
@@ -112,6 +130,28 @@ export const query = graphql`
           longitude
           mainImageUrl
           name
+          subHeading
+          websiteUrl
+          writtenReview
+          reviewDate
+          overallRating
+          fareScore
+          parkingScore
+          ambienceScore
+          serviceScore
+        }
+      }
+    }
+    allReviews: allGoogleSpreadsheetMain {
+      edges {
+        node {
+          googleSpreadsheetId
+          id
+          latitude
+          longitude
+          mainImageUrl
+          name
+          subHeading
           websiteUrl
           writtenReview
           reviewDate
